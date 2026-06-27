@@ -1,28 +1,131 @@
 <!DOCTYPE html>
-
 <html>
+<head>
+<title>Edit <%- todo %></title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    <head>
-        <title>Edit <%- todo %></title>
-        <style>
-            a {
-                text-decoration: none;
-                color: black;
-            }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-        </style>
-    </head>
+  .container {
+    max-width: 480px;
+    width: 100%;
+    padding: 20px;
+  }
 
-    <body>
-        <h1>Edit <%- todo %>:</h1>
-        <form action="/todo/edit/<%= todoIdx %>" method="post">
-            <p>
-                <label for="editTodo">Change to:</label>
-                <input type="hidden" name="_method" value="PUT">
-                <input type="text" name="editTodo" id="editTodo" autofocus placeholder="<%- todo %>" />
-                <input type="submit" value="Save" />
-            </p>
-        </form>
-    </body>
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 30px;
+    backdrop-filter: blur(10px);
+  }
 
+  h1 {
+    margin: 0 0 24px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    word-break: break-word;
+  }
+
+  h1 .highlight {
+    color: #667eea;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  input[type="submit"] {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  input[type="submit"]:hover {
+    background: #5a67d8;
+  }
+
+  input[type="submit"]:active {
+    transform: scale(0.97);
+  }
+
+  .cancel-link {
+    text-decoration: none;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.15s ease;
+  }
+
+  .cancel-link:hover {
+    background: #f4f4f8;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>✎ Edit: <span class="highlight"><%- todo %></span></h1>
+    <form action="/todo/edit/<%= todoIdx %>" method="post">
+      <input type="hidden" name="_method" value="PUT">
+      <label for="editTodo">Change to:</label>
+      <input type="text" name="editTodo" id="editTodo" autofocus placeholder="<%- todo %>" />
+      <div class="btn-row">
+        <input type="submit" value="Save" />
+        <a href="/" class="cancel-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
 </html>
